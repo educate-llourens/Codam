@@ -1,0 +1,7 @@
+*.o
+*.txt
+libft.a
+.DS_Store
+tests/
+libftTester/
+libft-war-machine/
