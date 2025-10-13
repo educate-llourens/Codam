@@ -6,15 +6,17 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/06 12:48:58 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/06 14:54:37 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/13 18:33:42 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-char	*fill_stash(int fd, char *stash);
-char	*extract_line(t_buffer *list);
-char	*next_line(char *stash);
+char	*fill_buffer(int fd, char *stash);
+char	*extract_return(char *stash);
+char	*extract_stash(char *stash);
+void	ft_bzero(void *memory, size_t size);
 
 char	*get_next_line(int fd)
 {
@@ -22,108 +24,100 @@ char	*get_next_line(int fd)
 	char		*return_line;
 	int			i;
 
+	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (ft_free(&stash), NULL);
 	if (!stash)
 	{
 		stash = ft_strdup("");
 		if (!stash)
-			return (free(stash), NULL);
+			return (ft_free(&stash), NULL);
 	}
-	stash = fill_stash(fd, stash);
-	return_line = next_line(stash);
-	while (*stash && *stash != '\n')
-		stash++;
-	stash++;
-	return(return_line);
-}
-
-char	*fill_stash(int fd, char *stash)
-{
-	t_buffer	*buffer_list;
-	t_buffer	*new_node;
-	int			bytes_read;
-	char		*str;
-	char		*return_str;
-
-	new_node = create_node();
-	buffer_list = new_node;
-	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(new_node->content, '\n'))
-	{
-		if (read(fd, new_node->content, BUFFER_SIZE) < 0)
-			return (free_list(buffer_list), NULL);
-		if (ft_strchr(new_node->content, '\n'))
-			continue ;
-		new_node->next = create_node();
-		new_node = new_node->next;
-	}
-	str = extract_line(buffer_list);
-	if (!str)
+	stash = fill_buffer(fd, stash);
+	if (stash[0] == '\0')
 		return (NULL);
-	return_str = ft_strjoin(stash, str);
-	return (return_str);
+	return_line = extract_return(stash);
+	stash = extract_stash(stash);
+	return (return_line);
 }
 
-char	*extract_line(t_buffer *list)
+char	*fill_buffer(int fd, char *stash)
 {
-	char		*str;
-	t_buffer	*list_start;
-	int			i;
+	char	*fetched_buffer;
+	char	*joined_str;
+	int		bytes_read;
+
+	bytes_read = 1;
+	fetched_buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	ft_bzero(fetched_buffer, BUFFER_SIZE + 1);
+	if (!fetched_buffer)
+		return (ft_free(&stash), NULL);
+	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
+	{
+		bytes_read = read(fd, fetched_buffer, BUFFER_SIZE);
+		if (fetched_buffer[0] == '\0')
+			return (fetched_buffer);
+		fetched_buffer[bytes_read] = '\0';
+		if (bytes_read < 0)
+			return (ft_free(&stash), ft_free(&fetched_buffer), NULL);
+		joined_str = ft_strjoin(stash, fetched_buffer);
+		if (!joined_str)
+			return (ft_free(&fetched_buffer), ft_free(&stash), NULL);
+		ft_free(&stash);
+		stash = joined_str;
+	}
+	return (ft_free(&fetched_buffer), stash);
+}
+
+char	*extract_return(char *stash)
+{
+	int		i;
+	char	*return_line;
 
 	i = 0;
-	list_start = list;
-	while (list)
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	return_line = malloc((sizeof(char) * i) + 1);
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
 	{
-		while (list->content[i])
-			i++;
-		list = list->next;
+		return_line[i] = stash[i];
+		i++;
 	}
-	str = malloc((sizeof(char *) * i) + 1);
-	if (!str)
-		return (NULL);
-	list = list_start;
-	while (list)
-	{
-		str = ft_strjoin(str, list->content);
-		list = list->next;
-	}
-	free_list(list_start);
-	return (str);
+	return_line[i] = '\0';
+	return (return_line);
 }
 
-char	*next_line(char *stash)
+char	*extract_stash(char *stash)
 {
-	char	*next_line;
+	char	*new_stash;
 	int		i;
 
 	i = 0;
-	while (stash[i] && stash[i] != '\n')
+	while (stash[i] && (stash[i] != '\n'))
 		i++;
-	next_line = malloc((sizeof(char) * i) + 1);
-	if (!next_line)
-		return (free(stash), NULL);
-	i = 0;
-	while (stash[i] && stash[i] != '\n')
-	{
-		next_line[i] = stash[i];
-		i++;
-	}
-	next_line[i] = '\0';
-	return (next_line);
+	if (stash[i] == '\0')
+		return (ft_free(&stash), ft_strdup(""));
+	i++;
+	new_stash = ft_strdup(stash + i);
+	if (!new_stash)
+		return (ft_free(&stash), NULL);
+	ft_free(&stash);
+	return (new_stash);
 }
 
-void	free_list(t_buffer *list)
+void	ft_bzero(void *memory, size_t size)
 {
-	t_buffer	*temp;
+	size_t			i;
+	unsigned char	*uc_buffer;
 
-	if (!list)
+	i = 0;
+	if (size == 0)
 		return ;
-	while (list)
+	uc_buffer = (unsigned char *)memory;
+	while (i < size)
 	{
-		temp = (list)->next;
-		free(list->content);
-		free(list);
-		list = temp;
+		uc_buffer[i] = '\0';
+		i++;
 	}
 }

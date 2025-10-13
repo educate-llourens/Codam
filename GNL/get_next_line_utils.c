@@ -6,16 +6,16 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/06 12:52:10 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/06 14:47:55 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/13 17:03:13 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*ft_strdup(const char *s);
-char		*ft_strchr(const char *s, int c);
-t_buffer	*create_node(void);
-char		*ft_strjoin(char const *str1, char const *str2);
+char	*ft_strdup(const char *string);
+char	*ft_strchr(const char *str, int chr);
+char	*ft_strjoin(char const *str1, char const *str2);
+int		ft_strlen(char *str);
 
 void	ft_free(char **memory)
 {
@@ -26,63 +26,37 @@ void	ft_free(char **memory)
 	}
 }
 
-
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *string)
 {
 	char	*new_s;
 	int		len_s;
 	int		i;
 
-	len_s = ft_strlen((char *)s);
+	len_s = ft_strlen((char *)string);
 	new_s = malloc(sizeof(char) * (len_s + 1));
 	if (!new_s)
 		return (NULL);
 	i = 0;
 	while (i < len_s)
 	{
-		new_s[i] = s[i];
+		new_s[i] = string[i];
 		i++;
 	}
 	new_s[len_s] = '\0';
 	return (new_s);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *str, int chr)
 {
-	int				i;
-	unsigned char	uc;
-
-	i = 0;
-	uc = (unsigned char)c;
-	while (s[i] != '\0')
+	while (*str)
 	{
-		if ((unsigned char)s[i] == uc)
-		{
-			return ((char *)s + i);
-		}
-		i++;
+		if ((unsigned char)*str == (unsigned char)chr)
+			return ((char *)str);
+		str++;
 	}
-	if (uc == '\0')
-	{
-		while (s[i] != '\0')
-		{
-			i++;
-		}
-		return ((char *)s + i);
-	}
+	if ((unsigned char)chr == '\0')
+		return ((char *)str);
 	return (NULL);
-}
-
-t_buffer	*create_node(void)
-{
-	t_buffer	*new_node;
-
-	new_node = malloc(sizeof(t_buffer));
-	if (!new_node)
-		return (NULL);
-	new_node->content[0] = '\0';
-	new_node->next = NULL;
-	return (new_node);
 }
 
 char	*ft_strjoin(char const *str1, char const *str2)
@@ -92,7 +66,8 @@ char	*ft_strjoin(char const *str1, char const *str2)
 
 	if (!str1 || !str2)
 		return (NULL);
-	new_string = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
+	new_string = malloc(sizeof(char) * (ft_strlen((char *)str1)
+				+ ft_strlen((char *)str2) + 1));
 	if (!new_string)
 		return (NULL);
 	start_newstr = new_string;
@@ -110,4 +85,14 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	}
 	*new_string = '\0';
 	return (start_newstr);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
