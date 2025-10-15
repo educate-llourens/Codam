@@ -6,7 +6,7 @@
 /*   By: lilo <lilo@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/07/01 10:01:00 by lilo          #+#    #+#                 */
-/*   Updated: 2025/07/08 16:47:02 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 18:50:55 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ char	**ft_split(char const *str,
 {
 	char	**list;
 
-	if (!str)
-		return (NULL);
 	list = malloc(sizeof(char *) * (find_list_size(str, chr) + 1));
 	if (!list)
 		return (NULL);

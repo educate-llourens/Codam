@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:34:57 by llourens      #+#    #+#                 */
-/*   Updated: 2025/07/08 12:27:37 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 18:48:51 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ size_t	ft_strlcpy(char *dst,
 	const char	*end;
 
 	len_src = ft_strlen(src);
-	if (!dst || !src)
-		return (len_src);
 	if (size == 0)
 		return (len_src);
 	end = src + size - 1;

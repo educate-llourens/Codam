@@ -6,15 +6,15 @@
 /*   By: lionesslilo <lionesslilo@student.codam.      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/20 19:08:16 by lionesslilo   #+#    #+#                 */
-/*   Updated: 2025/06/26 14:46:18 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 18:48:25 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* 
-    Allocates memory for the substring and returns the substring from the 
-    string. The substring begins at start and is maximum size of len. 
+/*
+	Allocates memory for the substring and returns the substring from the
+	string. The substring begins at start and is maximum size of len.
 */
 
 char	*ft_substr(char const *string, unsigned int start, size_t len)
@@ -24,8 +24,6 @@ char	*ft_substr(char const *string, unsigned int start, size_t len)
 	char		*exception;
 	size_t		len_str;
 
-	if (!string)
-		return (NULL);
 	len_str = ft_strlen(string);
 	if (len_str < start)
 	{
