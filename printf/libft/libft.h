@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 11:13:32 by llourens      #+#    #+#                 */
-/*   Updated: 2025/07/10 15:35:27 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 10:29:52 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
-
 
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);

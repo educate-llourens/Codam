@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/31 14:03:31 by llourens      #+#    #+#                 */
-/*   Updated: 2025/09/18 12:09:43 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 10:28:55 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	ft_print_xx(unsigned long int nb, char specifier)
 
 static int	ft_putnbr(unsigned int nbr)
 {
-	char remainder;
-	int count;
+	char	remainder;
+	int		count;
 
 	count = 0;
 	if (nbr >= 10)
