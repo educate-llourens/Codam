@@ -6,24 +6,22 @@
 /*   By: lilo <lilo@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/19 13:36:32 by lilo          #+#    #+#                 */
-/*   Updated: 2025/07/03 16:38:49 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/16 18:29:29 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* 
-	Looks for a substring within a string and returns a pointer to the 
+/*
+	Looks for a substring within a string and returns a pointer to the
 	first occurance of the substring.
 */
 
-char	*ft_strnstr(const char *haystack,
-						const char *needle,
-						size_t size)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t size)
 {
-	const char		*search_end;
-	char			*cursor;
-	size_t			needle_len;
+	const char	*search_end;
+	char		*cursor;
+	size_t		needle_len;
 
 	if (*needle == '\0')
 		return ((char *)haystack);

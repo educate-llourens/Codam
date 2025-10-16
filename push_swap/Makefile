@@ -6,7 +6,7 @@
 #    By: root <root@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/01/02 15:29:05 by root          #+#    #+#                  #
-#    Updated: 2025/10/15 11:30:15 by lelouren      ########   odam.nl          #
+#    Updated: 2025/10/16 15:11:22 by lelouren      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = push_swap.c \
 src/02_init_stack.c \
 src/03_sort_three.c \
 src/04_sort_five.c \
+src/05_sort_hundred.c \
 src/06_assign_binary_indices.c \
 src/07_radix_sort.c \
 utils/error_handling.c \

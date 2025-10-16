@@ -6,7 +6,7 @@
 /*   By: lilo <lilo@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/30 11:26:53 by lilo          #+#    #+#                 */
-/*   Updated: 2025/09/18 11:34:19 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/16 18:35:54 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ static size_t	get_newstr_size(const char *start_newstr,
 static char		*create_newstr(const char *start_newstr, const char *end_newstr,
 					char *new_str);
 
-/* 
-	Returns a copy of the string with the characters specified in 
+/*
+	Returns a copy of the string with the characters specified in
 	’exclusion set’ removed from the beginning and the end of the string.
 	If there are no valid characters it returns an empty string.
 */
 
-char	*ft_strtrim(char const *str,
-					char const *exclusion_set)
+char	*ft_strtrim(char const *str, char const *exclusion_set)
 {
 	const char	*start_newstr;
 	const char	*end_newstr;
@@ -53,8 +52,7 @@ char	*ft_strtrim(char const *str,
 	return (trimmed_str);
 }
 
-static int	check_exclusion_set(char const *str,
-								const char *exclusion_set)
+static int	check_exclusion_set(char const *str, const char *exclusion_set)
 {
 	while (*exclusion_set)
 	{
@@ -66,7 +64,7 @@ static int	check_exclusion_set(char const *str,
 }
 
 static size_t	get_newstr_size(const char *start_newstr,
-								const char *end_newstr)
+		const char *end_newstr)
 {
 	size_t	size;
 
@@ -79,9 +77,8 @@ static size_t	get_newstr_size(const char *start_newstr,
 	return (size);
 }
 
-static char	*create_newstr(const char *start_newstr,
-							const char *end_newstr,
-							char *new_str)
+static char	*create_newstr(const char *start_newstr, const char *end_newstr,
+		char *new_str)
 {
 	char	*ptr_return;
 

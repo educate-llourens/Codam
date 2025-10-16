@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/06 20:05:23 by llourens      #+#    #+#                 */
-/*   Updated: 2025/06/24 16:40:06 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/16 18:09:52 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 /* Returns the difference between two pieces of memory */
 
-int	ft_memcmp(const void *str_1,
-			const void *str_2,
-			size_t size)
+int	ft_memcmp(const void *str_1, const void *str_2, size_t size)
 {
 	size_t			i;
 	unsigned char	*uc_str_1;

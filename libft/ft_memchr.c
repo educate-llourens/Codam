@@ -6,20 +6,18 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/06 19:32:30 by llourens      #+#    #+#                 */
-/*   Updated: 2025/07/03 13:20:40 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/16 18:01:13 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-/* 
-	Locates the first occurance of byte in the initial size bytes 
+/*
+	Locates the first occurance of byte in the initial size bytes
 	pointed to by str.
 */
 
-void	*ft_memchr(const void *str,
-					int byte,
-					size_t size)
+void	*ft_memchr(const void *str, int byte, size_t size)
 {
 	size_t				i;
 	const unsigned char	*cuc_str;

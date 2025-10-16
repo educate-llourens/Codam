@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 11:13:32 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/15 10:29:52 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/16 15:09:59 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,5 @@ void		ft_putchar_fd(char chr, int fd);
 void		ft_putstr_fd(char *str, int fd);
 void		ft_putendl_fd(char *str, int fd);
 void		ft_putnbr_fd(int nbr, int fd);
-
-/* Bonus */
-t_list		*ft_lstnew(void *content);
-void		ft_lstadd_front(t_list **list, t_list *new);
-int			ft_lstsize(t_list *list);
-t_list		*ft_lstlast(t_list *list);
-void		ft_lstadd_back(t_list **list, t_list *new);
-void		ft_lstdelone(t_list *list, void (*del)(void*));
-void		ft_lstclear(t_list **list, void (*del)(void*));
-void		ft_lstiter(t_list *list, void (*function)(void *));
-t_list		*ft_lstmap(t_list *list, void *(*function)(void *),
-				void (*del)(void *));
 
 #endif

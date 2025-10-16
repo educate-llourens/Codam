@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 14:37:04 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/15 18:46:24 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/16 18:09:58 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 /* Copies memory up to size from src to dest */
 
-void	*ft_memcpy(void *dest,
-					const void *src,
-					size_t size)
+void	*ft_memcpy(void *dest, const void *src, size_t size)
 {
 	size_t			src_i;
 	size_t			dest_i;
