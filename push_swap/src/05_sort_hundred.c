@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/15 11:31:14 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/16 15:57:37 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/17 14:25:35 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	sort_hundred(t_stack_node **stack_a, t_stack_node **stack_b, int len)
 		return ;
 	assign_indices(stack_a);
 	assign_chunks(stack_a, len);
+	assign_min(stack_a);
+	assign_max(stack_a);
+	sorting_algorithm(stack_a, stack_b, len);
 }
 
 void	assign_chunks(t_stack_node **stack_a, int len)
@@ -54,6 +57,50 @@ void	assign_chunks(t_stack_node **stack_a, int len)
 	}
 }
 
+void	assign_min(t_stack_node **stack_a)
+{
+	t_stack_node	*current_node;
+
+	current_node = *stack_a;
+	while (*stack_a)
+	{
+		if (current_node->chunk_nbr == 1)
+			current_node->chunk_min = 0;
+		else if (current_node->chunk_nbr == 2)
+			current_node->chunk_min = 20;
+		else if (current_node->chunk_min == 3)
+			current_node->chunk_min = 40;
+		else if (current_node->chunk_nbr == 4)
+			current_node->chunk_min = 60;
+		else
+			current_node->chunk_min = 80;
+		if (current_node->ptr_next)
+			current_node = current_node->ptr_next;
+	}
+}
+
+void	assign_max(t_stack_node **stack_a)
+{
+	t_stack_node	*current_node;
+
+	current_node = *stack_a;
+	while (*stack_a)
+	{
+		if (current_node->chunk_nbr == 1)
+			current_node->chunk_max = 19;
+		else if (current_node->chunk_nbr == 2)
+			current_node->chunk_max = 39;
+		else if (current_node->chunk_min == 3)
+			current_node->chunk_max = 59;
+		else if (current_node->chunk_nbr == 4)
+			current_node->chunk_max = 79;
+		else
+			current_node->chunk_max = 100;
+		if (current_node->ptr_next)
+			current_node = current_node->ptr_next;
+	}
+}
+
 void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 		int len)
 {
@@ -67,7 +114,11 @@ void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 		if (current_node->chunk_nbr == current_chunk)
 		{
 			pb(stack_a, stack_b, 0);
-			if (current_node->int_index_in_sorted_array <)
+			if (current_node->int_index_in_sorted_array - current_node->chunk_min < 10)
+				rb(stack_b, 0);
+			else
+				ra(stack_a, 0);
 		}
+		current_node = current_node->ptr_next;
 	}
 }

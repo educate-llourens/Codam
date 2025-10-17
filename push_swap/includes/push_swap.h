@@ -6,7 +6,7 @@
 /*   By: root <root@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/02 15:45:56 by root          #+#    #+#                 */
-/*   Updated: 2025/10/15 12:33:41 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/17 13:54:17 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_stack_node
 	int					int_nbr;
 	int					int_index_in_sorted_array;
 	int					chunk_nbr;
+	int					chunk_min;
+	int					chunk_max;
 	struct s_stack_node	*ptr_next;
 	struct s_stack_node	*ptr_prev;
 }						t_stack_node;
