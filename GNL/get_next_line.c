@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/06 12:48:58 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/15 08:48:55 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/20 14:47:33 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ char	*get_next_line(int fd)
 {
 	static char	*stash;
 	char		*return_line;
-	int			i;
 
-	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (ft_free(&stash), NULL);
 	if (!stash)
@@ -34,12 +32,16 @@ char	*get_next_line(int fd)
 			return (ft_free(&stash), NULL);
 	}
 	stash = fill_buffer(fd, stash);
-	if (stash[0] == '\0')
+	if (!stash)
 		return (NULL);
-	return_line = extract_return(stash);
-	stash = extract_stash(stash);
 	if (stash[0] == '\0')
-		return (ft_free(&stash), ft_free(&return_line), NULL);
+		return (ft_free(&stash), NULL);
+	return_line = extract_return(stash);
+	if (!return_line)
+		return (ft_free(&stash), NULL);
+	stash = extract_stash(stash);
+	// if (stash[0] == '\0')
+	// 	return (ft_free(&stash), ft_free(&return_line), NULL);
 	return (return_line);
 }
 
@@ -50,18 +52,19 @@ char	*fill_buffer(int fd, char *stash)
 	int		bytes_read;
 
 	bytes_read = 1;
-	fetched_buffer = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	ft_bzero(fetched_buffer, BUFFER_SIZE + 1);
+	fetched_buffer = NULL;
+	fetched_buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!fetched_buffer)
 		return (ft_free(&stash), NULL);
-	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
+	ft_bzero(fetched_buffer, BUFFER_SIZE + 1);
+	while (bytes_read > 0 && !ft_strchr(fetched_buffer, '\n'))
 	{
 		bytes_read = read(fd, fetched_buffer, BUFFER_SIZE);
-		if (fetched_buffer[0] == '\0')
-			return (fetched_buffer);
-		fetched_buffer[bytes_read] = '\0';
 		if (bytes_read < 0)
 			return (ft_free(&stash), ft_free(&fetched_buffer), NULL);
+		// if (fetched_buffer[0] == '\0')
+		// 	return (ft_free(&fetched_buffer), ft_free(&stash), ft_strdup(""));
+		fetched_buffer[bytes_read] = '\0';
 		joined_str = ft_strjoin(stash, fetched_buffer);
 		if (!joined_str)
 			return (ft_free(&fetched_buffer), ft_free(&stash), NULL);
@@ -79,13 +82,19 @@ char	*extract_return(char *stash)
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	return_line = malloc((sizeof(char) * i) + 1);
+	if (stash[i] == '\n')
+		i++;
+	return_line = malloc(sizeof(char) * (i + 1));
+	if (!return_line)
+		return(ft_free(&stash), NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 	{
 		return_line[i] = stash[i];
 		i++;
 	}
+	if (stash[i] == '\n')
+		return_line[i++] = '\n';
 	return_line[i] = '\0';
 	return (return_line);
 }
@@ -96,10 +105,12 @@ char	*extract_stash(char *stash)
 	int		i;
 
 	i = 0;
+	if (!stash)
+		return (NULL);
 	while (stash[i] && (stash[i] != '\n'))
 		i++;
 	if (stash[i] == '\0')
-		return (ft_free(&stash), ft_strdup(""));
+		return (ft_free(&stash), NULL);
 	i++;
 	new_stash = ft_strdup(stash + i);
 	if (!new_stash)
