@@ -6,13 +6,15 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/10 21:58:36 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/15 11:45:04 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/21 15:37:22 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/push_swap.h"
 #include "../printf/libft/libft.h"
 #include "../printf/ft_printf.h"
+
+void	print_list(t_stack_node **stack_a);
 
 void	free_split(char **split)
 {
@@ -100,7 +102,20 @@ int	main(int argc, char **argv)
 	handle_sorted_case(&a_node, &b_node, len);
 	if (!is_sorted(a_node))
 		sort_stack(&a_node, &b_node, len);
+	print_list(&a_node);
 	free_stack(&a_node);
 	free_stack(&b_node);
 	return (0);
+}
+
+void	print_list(t_stack_node **stack_a)
+{
+	t_stack_node	*current_node;
+
+	current_node = *stack_a;
+	while(*stack_a)
+	{
+		ft_printf("%d\n", current_node->int_nbr);
+		current_node = current_node->ptr_next;
+	}
 }

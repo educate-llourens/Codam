@@ -6,34 +6,41 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/15 11:31:14 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/17 14:25:35 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/21 17:16:24 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 #include <stdio.h>
 
-void	assign_chunks(t_stack_node **stack_a, int len);
+void	assign_chunks(t_stack_node **stack_a);
 void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 			int len);
+void	move_largest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
+			int *len);
+void	chunk_to_b(t_stack_node **stack_a, t_stack_node **stack_b,
+			int current_chunk);
+void	assign_min(t_stack_node **stack_a);
+void	assign_max(t_stack_node **stack_a);
+int		nodes_in_chunk(t_stack_node **stack_a, int current_chunk);
 
 void	sort_hundred(t_stack_node **stack_a, t_stack_node **stack_b, int len)
 {
 	if (!stack_a || !*stack_a)
 		return ;
 	assign_indices(stack_a);
-	assign_chunks(stack_a, len);
+	assign_chunks(stack_a);
 	assign_min(stack_a);
 	assign_max(stack_a);
 	sorting_algorithm(stack_a, stack_b, len);
 }
 
-void	assign_chunks(t_stack_node **stack_a, int len)
+void	assign_chunks(t_stack_node **stack_a)
 {
 	t_stack_node	*current_node;
 
 	current_node = *stack_a;
-	while (*stack_a)
+	while (current_node)
 	{
 		if (current_node->int_index_in_sorted_array >= 0
 			&& current_node->int_index_in_sorted_array <= 19)
@@ -49,11 +56,7 @@ void	assign_chunks(t_stack_node **stack_a, int len)
 			current_node->chunk_nbr = 4;
 		else
 			current_node->chunk_nbr = 5;
-		printf("%d, ", current_node->chunk_nbr);
-		if (current_node->ptr_next)
-			current_node = current_node->ptr_next;
-		else
-			break ;
+		current_node = current_node->ptr_next;
 	}
 }
 
@@ -62,7 +65,7 @@ void	assign_min(t_stack_node **stack_a)
 	t_stack_node	*current_node;
 
 	current_node = *stack_a;
-	while (*stack_a)
+	while (current_node)
 	{
 		if (current_node->chunk_nbr == 1)
 			current_node->chunk_min = 0;
@@ -74,8 +77,7 @@ void	assign_min(t_stack_node **stack_a)
 			current_node->chunk_min = 60;
 		else
 			current_node->chunk_min = 80;
-		if (current_node->ptr_next)
-			current_node = current_node->ptr_next;
+		current_node = current_node->ptr_next;
 	}
 }
 
@@ -84,7 +86,7 @@ void	assign_max(t_stack_node **stack_a)
 	t_stack_node	*current_node;
 
 	current_node = *stack_a;
-	while (*stack_a)
+	while (current_node)
 	{
 		if (current_node->chunk_nbr == 1)
 			current_node->chunk_max = 19;
@@ -96,8 +98,7 @@ void	assign_max(t_stack_node **stack_a)
 			current_node->chunk_max = 79;
 		else
 			current_node->chunk_max = 100;
-		if (current_node->ptr_next)
-			current_node = current_node->ptr_next;
+		current_node = current_node->ptr_next;
 	}
 }
 
@@ -108,17 +109,60 @@ void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 	t_stack_node	*current_node;
 
 	current_chunk = 1;
-	current_node = *stack_a;
-	while (*stack_a)
+	while (current_chunk <= 5)
 	{
-		if (current_node->chunk_nbr == current_chunk)
+		chunk_to_b(stack_a, stack_b, current_chunk);
+		current_node = *stack_b;
+		while (*stack_b)
 		{
-			pb(stack_a, stack_b, 0);
-			if (current_node->int_index_in_sorted_array - current_node->chunk_min < 10)
-				rb(stack_b, 0);
-			else
-				ra(stack_a, 0);
+			move_largest_to_a(stack_a, stack_b, &len);
+			current_node = current_node->ptr_next;
 		}
-		current_node = current_node->ptr_next;
+		current_chunk++;
+	}
+}
+
+void	move_largest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
+		int *len)
+{
+	t_stack_node	*largest;
+
+	largest = find_largest(*stack_a);
+	while (*len > 0 && largest)
+	{
+		if (largest == ft_lstlast(*stack_a))
+		{
+			rrb(stack_b, 1);
+			pa(stack_a, stack_b, 1);
+			(*len)--;
+		}
+		else if (largest == (*stack_a))
+		{
+			pa(stack_a, stack_b, 1);
+			(*len)--;
+		}
+		else
+			rb(stack_b, 1);
+		largest = find_largest(*stack_b);
+	}
+}
+
+void	chunk_to_b(t_stack_node **stack_a, t_stack_node **stack_b,
+		int current_chunk)
+{
+	int	processed_nbrs;
+
+	processed_nbrs = 0;
+	while (processed_nbrs < stack_len(*stack_a))
+	{
+		if ((*stack_a)->chunk_nbr == current_chunk)
+		{
+			pb(stack_a, stack_b, 1);
+			if ((*stack_a)->int_index_in_sorted_array - (*stack_a)->chunk_min <= 10)
+				rb(stack_b, 1);
+		}
+		else
+			ra(stack_a, 1);
+		processed_nbrs++;
 	}
 }

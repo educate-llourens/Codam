@@ -6,7 +6,7 @@
 #    By: root <root@student.codam.nl>                 +#+                      #
 #                                                    +#+                       #
 #    Created: 2025/01/02 15:29:05 by root          #+#    #+#                  #
-#    Updated: 2025/10/16 15:11:22 by lelouren      ########   odam.nl          #
+#    Updated: 2025/10/21 15:49:31 by lelouren      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = push_swap
 LIBFTNAME = libft/libft.a
 PRINTFNAME = printf/libftprintf.a
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 export CFLAGS
 INCLUDES = -I./includes -I./libft -I./printf
 VPATH = src utils libft printf
@@ -37,7 +37,8 @@ utils/rotate_operations.c \
 utils/reverse_rotate_operations.c \
 utils/push_operations.c \
 utils/stack_smallsort_utils.c \
-utils/assign_binary_indices_utils.c
+utils/assign_binary_indices_utils.c \
+utils/sort_hundred_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
