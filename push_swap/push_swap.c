@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/10 21:58:36 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/21 15:37:22 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/22 10:07:54 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	print_list(t_stack_node **stack_a)
 	t_stack_node	*current_node;
 
 	current_node = *stack_a;
-	while(*stack_a)
+	while(current_node)
 	{
 		ft_printf("%d\n", current_node->int_nbr);
 		current_node = current_node->ptr_next;

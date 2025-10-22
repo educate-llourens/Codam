@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/15 11:31:14 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/21 17:16:24 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/22 10:54:26 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 void	assign_chunks(t_stack_node **stack_a);
 void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 			int len);
-void	move_largest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
+void	move_smallest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
 			int *len);
 void	chunk_to_b(t_stack_node **stack_a, t_stack_node **stack_b,
 			int current_chunk);
 void	assign_min(t_stack_node **stack_a);
 void	assign_max(t_stack_node **stack_a);
-int		nodes_in_chunk(t_stack_node **stack_a, int current_chunk);
+void	move_largest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
+			int *len);
 
 void	sort_hundred(t_stack_node **stack_a, t_stack_node **stack_b, int len)
 {
@@ -33,6 +34,7 @@ void	sort_hundred(t_stack_node **stack_a, t_stack_node **stack_b, int len)
 	assign_min(stack_a);
 	assign_max(stack_a);
 	sorting_algorithm(stack_a, stack_b, len);
+	// handle_sorted_case(stack_a, stack_b, len);
 }
 
 void	assign_chunks(t_stack_node **stack_a)
@@ -71,7 +73,7 @@ void	assign_min(t_stack_node **stack_a)
 			current_node->chunk_min = 0;
 		else if (current_node->chunk_nbr == 2)
 			current_node->chunk_min = 20;
-		else if (current_node->chunk_min == 3)
+		else if (current_node->chunk_nbr == 3)
 			current_node->chunk_min = 40;
 		else if (current_node->chunk_nbr == 4)
 			current_node->chunk_min = 60;
@@ -92,7 +94,7 @@ void	assign_max(t_stack_node **stack_a)
 			current_node->chunk_max = 19;
 		else if (current_node->chunk_nbr == 2)
 			current_node->chunk_max = 39;
-		else if (current_node->chunk_min == 3)
+		else if (current_node->chunk_nbr == 3)
 			current_node->chunk_max = 59;
 		else if (current_node->chunk_nbr == 4)
 			current_node->chunk_max = 79;
@@ -107,18 +109,17 @@ void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 {
 	int				current_chunk;
 	t_stack_node	*current_node;
+	int				processed_nbrs;
 
-	current_chunk = 1;
-	while (current_chunk <= 5)
+	current_chunk = 5;
+	while (current_chunk >= 0)
 	{
 		chunk_to_b(stack_a, stack_b, current_chunk);
 		current_node = *stack_b;
-		while (*stack_b)
-		{
+		processed_nbrs = 0;
+		while (stack_len(*stack_b) > 0)
 			move_largest_to_a(stack_a, stack_b, &len);
-			current_node = current_node->ptr_next;
-		}
-		current_chunk++;
+		current_chunk--;
 	}
 }
 
@@ -127,16 +128,16 @@ void	move_largest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
 {
 	t_stack_node	*largest;
 
-	largest = find_largest(*stack_a);
+	largest = find_largest(*stack_b);
 	while (*len > 0 && largest)
 	{
-		if (largest == ft_lstlast(*stack_a))
+		if (largest == ft_lstlast(*stack_b))
 		{
 			rrb(stack_b, 1);
 			pa(stack_a, stack_b, 1);
 			(*len)--;
 		}
-		else if (largest == (*stack_a))
+		else if (largest == (*stack_b))
 		{
 			pa(stack_a, stack_b, 1);
 			(*len)--;
@@ -151,14 +152,17 @@ void	chunk_to_b(t_stack_node **stack_a, t_stack_node **stack_b,
 		int current_chunk)
 {
 	int	processed_nbrs;
+	int	a_len;
 
 	processed_nbrs = 0;
-	while (processed_nbrs < stack_len(*stack_a))
+	a_len = stack_len(*stack_a);
+	while (processed_nbrs < a_len)
 	{
 		if ((*stack_a)->chunk_nbr == current_chunk)
 		{
 			pb(stack_a, stack_b, 1);
-			if ((*stack_a)->int_index_in_sorted_array - (*stack_a)->chunk_min <= 10)
+			if ((*stack_b)->int_index_in_sorted_array
+				- (*stack_b)->chunk_min <= 10)
 				rb(stack_b, 1);
 		}
 		else
