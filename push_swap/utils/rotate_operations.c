@@ -6,19 +6,20 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/21 10:22:28 by llourens      #+#    #+#                 */
-/*   Updated: 2025/02/19 15:15:56 by llourens      ########   odam.nl         */
+/*   Updated: 2025/10/23 10:34:25 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../printf/libft/libft.h"
 #include "../printf/ft_printf.h"
+#include "../printf/libft/libft.h"
 
 static void	rotate(t_stack_node **head)
 {
 	t_stack_node	*first_node;
 	t_stack_node	*second_node;
 	t_stack_node	*last_node;
+
 	if (!head || !(*head) || !(*head)->ptr_next)
 	{
 		ft_putendl_fd("Error", 2);

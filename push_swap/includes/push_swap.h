@@ -6,7 +6,7 @@
 /*   By: root <root@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/02 15:45:56 by root          #+#    #+#                 */
-/*   Updated: 2025/10/22 10:20:12 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/23 10:21:45 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int						is_reverse_sorted(t_stack_node *stack);
 // Stack utils
 t_stack_node			*find_highest(t_stack_node *stack);
 t_stack_node			*find_smallest(t_stack_node *stack);
-t_stack_node			*find_largest(t_stack_node *stack);
 // Linked list utils
 t_stack_node			*ft_lstlast(t_stack_node *lst);
 int						stack_len(t_stack_node *stack);
@@ -93,5 +92,14 @@ int						*linkedlist_to_array(t_stack_node *stack);
 int						*sort_array(int *array, int len);
 void					push_smallest_to_b(t_stack_node **stack_a,
 							t_stack_node **stack_b);
+void					chunk_to_b(t_stack_node **stack_a,
+							t_stack_node **stack_b, int current_chunk);
+void					move_largest_to_a(t_stack_node **stack_a,
+							t_stack_node **stack_b, int *len);
+int						chunk_in_a(t_stack_node **stack_a, int current_chunk);
+int						index_of_node(t_stack_node **stack,
+							t_stack_node *target);
+
+t_stack_node			*find_largest(t_stack_node *stack);
 
 #endif
