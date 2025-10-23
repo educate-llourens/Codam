@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/15 11:31:14 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/22 10:54:26 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/23 10:02:22 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	assign_min(t_stack_node **stack_a);
 void	assign_max(t_stack_node **stack_a);
 void	move_largest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
 			int *len);
+int		chunk_in_a(t_stack_node **stack_a, int current_chunk);
+int	index_of_node(t_stack_node **stack, t_stack_node *target);
 
 void	sort_hundred(t_stack_node **stack_a, t_stack_node **stack_b, int len)
 {
@@ -34,7 +36,6 @@ void	sort_hundred(t_stack_node **stack_a, t_stack_node **stack_b, int len)
 	assign_min(stack_a);
 	assign_max(stack_a);
 	sorting_algorithm(stack_a, stack_b, len);
-	// handle_sorted_case(stack_a, stack_b, len);
 }
 
 void	assign_chunks(t_stack_node **stack_a)
@@ -126,47 +127,83 @@ void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 void	move_largest_to_a(t_stack_node **stack_a, t_stack_node **stack_b,
 		int *len)
 {
-	t_stack_node	*largest;
-
-	largest = find_largest(*stack_b);
-	while (*len > 0 && largest)
+	while (*len > 0 && find_largest(*stack_b))
 	{
-		if (largest == ft_lstlast(*stack_b))
+		if (stack_len(*stack_b) == 1)
+		{
+			pa(stack_a, stack_b, 1);
+			len--;
+			break ;
+		}
+		else if ((find_largest(*stack_b) == ft_lstlast(*stack_b))
+			&& stack_len(*stack_b) > 1)
 		{
 			rrb(stack_b, 1);
 			pa(stack_a, stack_b, 1);
 			(*len)--;
 		}
-		else if (largest == (*stack_b))
+		else if (find_largest(*stack_b) == (*stack_b))
 		{
 			pa(stack_a, stack_b, 1);
 			(*len)--;
 		}
-		else
+		else if (stack_len(*stack_b) > 0)
 			rb(stack_b, 1);
-		largest = find_largest(*stack_b);
 	}
 }
 
 void	chunk_to_b(t_stack_node **stack_a, t_stack_node **stack_b,
 		int current_chunk)
 {
-	int	processed_nbrs;
-	int	a_len;
+	t_stack_node	*current_node;
+	int				largest_index;
+	int				b_len;
 
-	processed_nbrs = 0;
-	a_len = stack_len(*stack_a);
-	while (processed_nbrs < a_len)
+	current_node = *stack_a;
+	while (chunk_in_a(stack_a, current_chunk))
 	{
 		if ((*stack_a)->chunk_nbr == current_chunk)
 		{
 			pb(stack_a, stack_b, 1);
-			if ((*stack_b)->int_index_in_sorted_array
-				- (*stack_b)->chunk_min <= 10)
+			b_len = stack_len(*stack_b);
+			largest_index = index_of_node(stack_b, find_largest(*stack_b));
+			if (largest_index <= (b_len / 2) && stack_len(*stack_b) > 1)
 				rb(stack_b, 1);
+			else if (b_len > 1)
+				rrb(stack_b, 1);
 		}
 		else
 			ra(stack_a, 1);
-		processed_nbrs++;
 	}
+}
+
+int	index_of_node(t_stack_node **stack, t_stack_node *target)
+{
+	int				index;
+	t_stack_node	*current;
+
+	index = 0;
+	current = *stack;
+	while (current)
+	{
+		if (current == target)
+			return (index);
+		current = current->ptr_next;
+		index++;
+	}
+	return (-1); // target node not found in stack
+}
+
+int	chunk_in_a(t_stack_node **stack_a, int current_chunk)
+{
+	t_stack_node	*current_node;
+
+	current_node = *stack_a;
+	while (current_node)
+	{
+		if (current_node->chunk_nbr == current_chunk)
+			return (1);
+		current_node = current_node->ptr_next;
+	}
+	return (0);
 }

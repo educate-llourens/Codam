@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/10 21:58:36 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/22 10:07:54 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/23 08:43:40 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,7 @@ int	main(int argc, char **argv)
 	handle_sorted_case(&a_node, &b_node, len);
 	if (!is_sorted(a_node))
 		sort_stack(&a_node, &b_node, len);
-	print_list(&a_node);
 	free_stack(&a_node);
 	free_stack(&b_node);
 	return (0);
-}
-
-void	print_list(t_stack_node **stack_a)
-{
-	t_stack_node	*current_node;
-
-	current_node = *stack_a;
-	while(current_node)
-	{
-		ft_printf("%d\n", current_node->int_nbr);
-		current_node = current_node->ptr_next;
-	}
 }
