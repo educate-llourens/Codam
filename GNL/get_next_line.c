@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/06 12:48:58 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/31 13:36:43 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/31 13:55:52 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*extract_return(char *stash)
 		i++;
 	return_line = malloc(sizeof(char) * (i + 1));
 	if (!return_line)
-		return(ft_free(&stash), NULL);
+		return (ft_free(&stash), NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 	{
