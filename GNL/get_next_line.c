@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/06 12:48:58 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/20 14:47:33 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/10/31 13:35:02 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ char	*fill_buffer(int fd, char *stash)
 		bytes_read = read(fd, fetched_buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 			return (ft_free(&stash), ft_free(&fetched_buffer), NULL);
-		// if (fetched_buffer[0] == '\0')
-		// 	return (ft_free(&fetched_buffer), ft_free(&stash), ft_strdup(""));
 		fetched_buffer[bytes_read] = '\0';
 		joined_str = ft_strjoin(stash, fetched_buffer);
 		if (!joined_str)
