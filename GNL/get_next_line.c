@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/06 12:48:58 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/31 13:55:52 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/03 15:40:19 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_next_line(int fd)
 		return (ft_free(&stash), NULL);
 	return_line = extract_return(stash);
 	if (!return_line)
-		return (ft_free(&stash), NULL);
+		return (NULL);
 	stash = extract_stash(stash);
 	return (return_line);
 }
