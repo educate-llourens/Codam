@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   06_radix_sort.c                                    :+:    :+:            */
+/*   07_radix_sort.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 13:02:11 by llourens      #+#    #+#                 */
-/*   Updated: 2025/02/11 13:44:32 by llourens      ########   odam.nl         */
+/*   Updated: 2025/11/26 12:15:28 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	process_stack(t_stack_node **stack_a, t_stack_node **stack_b,
 		pa(stack_a, stack_b, 0);
 }
 
-void	radix_sort(t_stack_node **stack_a,
-			t_stack_node **stack_b, int stack_len)
+void	radix_sort(t_stack_node **stack_a, t_stack_node **stack_b,
+		int stack_len)
 {
 	int	current_bit_position;
 	int	max_bits;

@@ -6,7 +6,7 @@
 /*   By: lilo <lilo@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/11/06 10:42:27 by lilo          #+#    #+#                 */
-/*   Updated: 2025/09/18 12:11:13 by lilo          ########   odam.nl         */
+/*   Updated: 2025/11/03 16:59:41 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-/* Prints a pointer address */
+/* 
+	- Takes a void pointer
+	- Writes a pointer address
+	- Returns the number of bytes ft_printxx wrote
+*/
 
 int	ft_print_p(void *nbr)
 {

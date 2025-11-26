@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/31 14:30:11 by llourens      #+#    #+#                 */
-/*   Updated: 2025/09/18 12:12:46 by lilo          ########   odam.nl         */
+/*   Updated: 2025/11/03 17:01:11 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Converts a number to a string and then prints the string */
+/* 
+	- Takes in a number
+	- Converts a number to a string and then writes the string
+	- Returns the number of bytes it wrote
+*/
 
 int	ft_print_di(int nbr)
 {

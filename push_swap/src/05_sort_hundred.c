@@ -6,7 +6,7 @@
 /*   By: lelouren <lelouren@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/15 11:31:14 by lelouren      #+#    #+#                 */
-/*   Updated: 2025/10/23 10:20:28 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/24 09:35:51 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,12 @@ void	sorting_algorithm(t_stack_node **stack_a, t_stack_node **stack_b,
 {
 	int				current_chunk;
 	t_stack_node	*current_node;
-	int				processed_nbrs;
 
 	current_chunk = 5;
 	while (current_chunk >= 0)
 	{
 		chunk_to_b(stack_a, stack_b, current_chunk);
 		current_node = *stack_b;
-		processed_nbrs = 0;
 		while (stack_len(*stack_b) > 0)
 			move_largest_to_a(stack_a, stack_b, &len);
 		current_chunk--;

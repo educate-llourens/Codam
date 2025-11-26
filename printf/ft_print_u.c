@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/20 00:38:11 by llourens      #+#    #+#                 */
-/*   Updated: 2025/09/18 12:10:16 by lilo          ########   odam.nl         */
+/*   Updated: 2025/11/03 16:55:37 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-/* Prints and unsigned integer */
+/* 
+	- Takes an unsigned int
+	- Writes the unsigned int
+	- Returns the number of bytes it wrote 
+*/
 
 int	ft_print_u(unsigned int nbr)
 {

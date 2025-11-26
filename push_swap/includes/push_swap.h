@@ -6,7 +6,7 @@
 /*   By: root <root@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/02 15:45:56 by root          #+#    #+#                 */
-/*   Updated: 2025/10/23 10:21:45 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/24 09:42:21 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int						is_reverse_sorted(t_stack_node *stack);
 // Stack utils
 t_stack_node			*find_highest(t_stack_node *stack);
 t_stack_node			*find_smallest(t_stack_node *stack);
+
 // Linked list utils
 t_stack_node			*ft_lstlast(t_stack_node *lst);
 int						stack_len(t_stack_node *stack);

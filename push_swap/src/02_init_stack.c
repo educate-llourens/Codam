@@ -6,13 +6,13 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/15 16:55:16 by llourens      #+#    #+#                 */
-/*   Updated: 2025/02/12 19:40:49 by llourens      ########   odam.nl         */
+/*   Updated: 2025/11/26 12:58:55 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../printf/libft/libft.h"
 #include "../printf/ft_printf.h"
+#include "../printf/libft/libft.h"
 
 void	init_stack(t_stack_node **stack_a_node, char **argv_list, int argc)
 {

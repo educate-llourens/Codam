@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 15:05:03 by llourens      #+#    #+#                 */
-/*   Updated: 2025/07/08 15:14:49 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 18:46:41 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_memmove(void *dest,
 
 	src_i = 0;
 	dest_i = 0;
-	if ((!dest && !src) || size == 0)
+	if (size == 0)
 		return (dest);
 	uc_dest = (unsigned char *)dest;
 	uc_src = (unsigned char *)src;

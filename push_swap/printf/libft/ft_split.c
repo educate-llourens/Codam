@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/25 12:30:57 by llourens      #+#    #+#                 */
-/*   Updated: 2024/10/25 12:43:48 by llourens      ########   odam.nl         */
+/*   Updated: 2025/11/24 15:03:36 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	add_to_list(const char *s, char **list, char c, size_t *index)
 	return (1);
 }
 
-static size_t	ft_countstring(const char *s, char c)
+size_t	ft_countstring(const char *s, char c)
 {
 	size_t	count;
 	int		in_word;

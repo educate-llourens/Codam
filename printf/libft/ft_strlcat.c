@@ -6,32 +6,21 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/05/02 17:09:49 by llourens      #+#    #+#                 */
-/*   Updated: 2025/07/03 10:43:15 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 18:55:47 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./libft.h"
 
-static size_t	strlcat_dest_len(char *dst,
-									size_t size)
-{
-	size_t	i;
+static size_t	strlcat_dest_len(char *dst, size_t size);
 
-	i = 0;
-	while (i < size && dst[i])
-		i++;
-	return (i);
-}
-
-/* 
+/*
 	Concatanates src to dest at most size - 1 (Always
 	NULL terminates unless size is less than or equal to
 	the length of dest)
 */
 
-size_t	ft_strlcat(char *dst,
-				const char *src,
-				size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	return_value;
 	size_t	dest_len;
@@ -49,4 +38,14 @@ size_t	ft_strlcat(char *dst,
 	}
 	dst[dest_len + i] = '\0';
 	return (return_value);
+}
+
+static size_t	strlcat_dest_len(char *dst, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size && dst[i])
+		i++;
+	return (i);
 }

@@ -6,14 +6,14 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/04 08:58:57 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/22 10:20:22 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/24 09:16:11 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static void	move_smallest_to_b(t_stack_node **stack_a,
-			t_stack_node **stack_b, int *len)
+static void	move_smallest_to_b(t_stack_node **stack_a, t_stack_node **stack_b,
+		int *len)
 {
 	t_stack_node	*smallest;
 
@@ -32,9 +32,7 @@ static void	move_smallest_to_b(t_stack_node **stack_a,
 			(*len)--;
 		}
 		else
-		{
 			ra(stack_a, 1);
-		}
 		smallest = find_smallest(*stack_a);
 	}
 }

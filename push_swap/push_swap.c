@@ -6,15 +6,13 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/10 21:58:36 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/23 08:43:40 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/26 12:56:52 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/push_swap.h"
-#include "../printf/libft/libft.h"
 #include "../printf/ft_printf.h"
-
-void	print_list(t_stack_node **stack_a);
+#include "../printf/libft/libft.h"
+#include "includes/push_swap.h"
 
 void	free_split(char **split)
 {
@@ -33,18 +31,17 @@ void	handle_single_argument(char **argv, char ***split_argv)
 {
 	*split_argv = ft_split(argv[1], ' ');
 	if (!*split_argv || !**split_argv || (!ft_isdigit(***split_argv)
-			&& ((***split_argv) != '-' || !ft_isdigit((*split_argv)[0][1]))) ||
-		(ft_strlen((*split_argv)[0]) == 1 && (*split_argv)[0][0] == '-'))
+			&& ((***split_argv) != '-' || !ft_isdigit((*split_argv)[0][1])))
+		|| (ft_strlen((*split_argv)[0]) == 1 && (*split_argv)[0][0] == '-'))
 	{
 		ft_putendl_fd("Error", 2);
-		if (*split_argv)
-			free_split(*split_argv);
+		free_split(*split_argv);
 		exit(1);
 	}
 }
 
-void	handle_sorted_case(t_stack_node **a_node,
-			t_stack_node **b_node, int len)
+void	handle_sorted_case(t_stack_node **a_node, t_stack_node **b_node,
+		int len)
 {
 	int	len_a;
 	int	len_og;
@@ -78,6 +75,14 @@ void	sort_stack(t_stack_node **a_node, t_stack_node **b_node, int len)
 	else
 		radix_sort(a_node, b_node, len);
 }
+
+/*
+	- Takes in a list of nmbers. This can be seperated by spaces or in a
+	single string separated by spaces.
+	- Delegates the input check, stack initiation, reverse sorted stack
+	handling, and sorting.
+	- Cleans up at the end, freeing the stacks.
+*/
 
 int	main(int argc, char **argv)
 {

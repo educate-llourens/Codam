@@ -6,7 +6,7 @@
 /*   By: lilo <lilo@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/26 15:09:52 by lilo          #+#    #+#                 */
-/*   Updated: 2025/07/04 13:03:48 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/15 18:49:14 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	char	*new_string;
 	char	*start_newstr;
 
-	if (!str1 || !str2)
-		return (NULL);
 	new_string = malloc(sizeof(char) * (ft_strlen(str1) + ft_strlen(str2) + 1));
 	if (!new_string)
 		return (NULL);

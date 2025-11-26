@@ -6,7 +6,7 @@
 /*   By: lilo <lilo@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/06/26 17:07:31 by lilo          #+#    #+#                 */
-/*   Updated: 2025/07/08 17:30:23 by lilo          ########   odam.nl         */
+/*   Updated: 2025/10/16 17:52:18 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ char	*ft_itoa(int nbr)
 	printable_nbr = exceptions(l_nbr);
 	if (printable_nbr)
 		return (printable_nbr);
-	else if (l_nbr == 0 || l_nbr == -2147483648)
-		return (NULL);
 	nbr_size = count_digits(nbr);
 	printable_nbr = malloc(sizeof(char) * (nbr_size + 1));
 	if (!printable_nbr)

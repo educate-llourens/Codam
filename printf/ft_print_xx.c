@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/10/31 14:03:31 by llourens      #+#    #+#                 */
-/*   Updated: 2025/10/15 10:28:55 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/03 16:54:23 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@
 
 static int	ft_putnbr(unsigned int nbr);
 
-/* Prints the hex number in lowercase */
+/* 
+	- Takes in the specifier 'x' or 'X' and the number to convert
+	- Converts the number into lower or uppercase hex and prints it
+	- Returns the number of bytes it wrote
+*/
 
 int	ft_print_xx(unsigned long int nb, char specifier)
 {
