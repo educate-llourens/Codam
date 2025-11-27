@@ -6,7 +6,7 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/15 17:21:33 by llourens      #+#    #+#                 */
-/*   Updated: 2025/02/11 20:49:00 by llourens      ########   odam.nl         */
+/*   Updated: 2025/11/27 09:06:12 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	free_stack(t_stack_node **stack)
 	while (current_node)
 	{
 		temp_node = current_node->ptr_next;
-		current_node->int_nbr = 0;
 		free(current_node);
 		current_node = temp_node;
 	}

@@ -6,13 +6,20 @@
 /*   By: llourens <llourens@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/15 16:55:16 by llourens      #+#    #+#                 */
-/*   Updated: 2025/11/26 12:58:55 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/27 08:50:08 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 #include "../printf/ft_printf.h"
 #include "../printf/libft/libft.h"
+
+void	init_error_handle(t_stack_node **node, char **list, int argc)
+{
+	if (argc == 2)
+		free_split(list);
+	free_and_handle(node);
+}
 
 void	init_stack(t_stack_node **stack_a_node, char **argv_list, int argc)
 {
@@ -24,16 +31,12 @@ void	init_stack(t_stack_node **stack_a_node, char **argv_list, int argc)
 	while (argv_list[i])
 	{
 		if (is_syntax_error(argv_list[i]) == 1)
-		{
-			if (argc == 2)
-				free_split(argv_list);
-			free_and_handle(stack_a_node);
-		}
+			init_error_handle(stack_a_node, argv_list, argc);
 		long_nbr = ft_atol(argv_list[i]);
 		if (long_nbr < INT_MIN || long_nbr > INT_MAX)
-			free_and_handle(stack_a_node);
+			init_error_handle(stack_a_node, argv_list, argc);
 		if (is_duplicate(*stack_a_node, long_nbr) == 1)
-			free_and_handle(stack_a_node);
+			init_error_handle(stack_a_node, argv_list, argc);
 		append_node(stack_a_node, long_nbr);
 		i++;
 	}

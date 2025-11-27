@@ -6,7 +6,7 @@
 /*   By: root <root@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/02 15:45:56 by root          #+#    #+#                 */
-/*   Updated: 2025/11/24 09:42:21 by lelouren      ########   odam.nl         */
+/*   Updated: 2025/11/27 09:01:07 by lelouren      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <limits.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
 
 # define CHUNK_SIZE 20
