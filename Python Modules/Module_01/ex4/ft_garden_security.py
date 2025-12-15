@@ -60,6 +60,13 @@ class SecurePlant:
 
 
 def print_height_result(plant: SecurePlant, height: int) -> None:
+    """Sets the height and prints [OK] if it is a valid change or
+       an error message with [REJECTED] if it is an invalid change
+
+    Args:
+        plant (SecurePlant): The plant class that the changes wil apply to
+        height (int): The height to be changed
+    """
     if plant.set_height(height) == 0:
         print(f"Height updated: {height}cm", end=" ")
         print("[OK]")
@@ -71,6 +78,13 @@ def print_height_result(plant: SecurePlant, height: int) -> None:
 
 
 def print_age_result(plant: SecurePlant, age: int) -> None:
+    """ets the age and prints [OK] if it is a valid change or
+       an error message with [REJECTED] if it is an invalid change
+
+    Args:
+        plant (SecurePlant): The plant class that the changes wil apply to
+        age (int): The age to be changed
+    """
     if plant.set_age(age) == 0:
         print(f"Age updated: {age} days", end=" ")
         print("[OK]")
@@ -90,4 +104,5 @@ print_age_result(rose, 30)
 print("")
 print_height_result(rose, -5)
 print("")
-print(f"Current plant: {current_plant.name}({current_plant._start_height}, {current_plant._start_age}")
+print(f"Current plant: {current_plant.name}", end="")
+print(f"({current_plant._start_height}cm, {current_plant._start_age} days)")
