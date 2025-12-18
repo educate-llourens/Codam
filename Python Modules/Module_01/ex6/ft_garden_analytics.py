@@ -1,48 +1,47 @@
-#!/usr/bin/env Python3
+#!/usr/bin/env python3
 
-class GardenManager:
-    def __init__(self, garden_name: str):
-        self.garden_name = garden_name
-    
-    def create_garden_network(self) -> None:
-
-
-
-class Garden_Stats(GardenManager):
-    def __init__(self, garden_name: str):
-        super().__init__(garden_name)
-        
-
-class Plant(GardenManager):
-    def __init__(self, garden_name: str, plant_name: str,
-                 plant_height: int, plant_age: int):
-        super().__init__(garden_name)
+class Plant:
+    def __init__(self, plant_name: str, plant_height: int,
+                 plant_age: int) -> None:
         self.plant_name = plant_name
         self.plant_height = plant_height
         self.plant_age = plant_age
+
+    def grow(self) -> None:
+        self.plant_height += 1
     
-    @classmethod
-    def grow(cls, plant_height) -> "Plant":
-        plant_height += 1
-        return cls(plant_height)
+    def set_height(self) -> None:
         
 
+
 class FloweringPlant(Plant):
-    def __init__(self, garden_name: str, plant_name: str, plant_height: int,
-                 plant_age: int, flower_colour: str):
-        super().__init__(garden_name, plant_name, plant_height, plant_age)
-    
-    @classmethod
-    def bloom(cls) -> str:
-        return "Blooming"
+    def __init__(self, plant_name, plant_height, plant_age):
+        super().__init__(plant_name, plant_height, plant_age)
+
 
 class PrizeFlower(FloweringPlant):
-    def __init__(self, garden_name, plant_name, plant_height, plant_age):
-        super().__init__(garden_name, plant_name, plant_height, plant_age)
+    def __init__(self, plant_name, plant_height, plant_age):
+        super().__init__(plant_name, plant_height, plant_age)
 
 
-def grow_plants() -> None:
-    
+class GardenManager:
+    def __init__(self, garden_name: str) -> None:
+        self.garden_name: str = garden_name
+        self.plants: list[Plant] = []
 
-print("=== Garden Management System Demo ===\n")
+    @classmethod
+    def create_garden_network(cls,
+                              garden_names: list[str]
+                              ) -> list['GardenManager']:
+        gardens: list[GardenManager] = []
+        i: int = 0
+        while i < len(garden_names):
+            garden = cls(garden_names[i])
+            gardens.append(garden)
+            i += 1
+        return gardens
 
+    def add_plant(self, plant_name: str, plant_height: int,
+                  plant_age: int) -> None:
+        new_plant: Plant = Plant(plant_name, plant_height, plant_age)
+        self.plants.append(new_plant)
