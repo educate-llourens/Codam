@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 class SecurePlant:
+    """
+    Sets the values for the characteristics of the plants in a safe manner
+    """
     def __init__(self, name: str, start_height: int, start_age: int):
         self.name = name
         self._start_height = start_height

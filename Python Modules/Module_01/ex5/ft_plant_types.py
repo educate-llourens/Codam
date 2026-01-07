@@ -1,33 +1,77 @@
 #!/usr/bin/env python3
 
 class Plant:
+    """
+        Contains the characteristics of a plant
+    """
     def __init__(self, plant_name: str, plant_height: int, plant_age: int):
+        """
+            Initialises the Plant class
+
+        Args:
+            plant_name (str): Name of the plant
+            plant_height (int): Height of the plant
+            plant_age (int): Age of the plant
+        """
         self.plant_name = plant_name
         self.plant_height = plant_height
         self.plant_age = plant_age
 
 
 class Flower(Plant):
+    """
+        Contains the charectistics of a flower and inherits from the
+        Plant class
+
+    Args:
+        Plant (): The class Flower inherits from
+    """
     def __init__(self, plant_name: str, plant_height: int, plant_age: int,
                  colour: str):
+        """
+        Initialises the Flower class
+
+        Args:
+            plant_name (str): Name of the flower
+            plant_height (int): height of the flower
+            plant_age (int): Age of the flower
+            colour (str): Colour of the flower when it blooms
+        """
         super().__init__(plant_name, plant_height, plant_age)
         self.colour = colour
 
     def bloom(self) -> None:
-        """Prints the flower name and a blooming message
+        """
+        Prints the flower name and a blooming message
         """
         print(f"{self.plant_name.capitalize()} is blooming beautifully!")
 
 
 class Tree(Plant):
+    """
+    Contains the characteristics of a tree
+
+    Args:
+        Plant (): The class that Tree inherits from
+    """
     def __init__(self, plant_name: str, plant_height: int, plant_age: int,
                  diameter: int):
+        """
+        Initialises the Tree class
+
+        Args:
+            plant_name (str): Name of the tree
+            plant_height (int): Height of the tree
+            plant_age (int): Age of the tree
+            diameter (int): Diameter of the tree
+        """
         super().__init__(plant_name, plant_height, plant_age)
         self.diameter = diameter
 
     def shade(self) -> None:
-        """uses the tree's radius to work out the shade radius and print
-           the size of the area that the sade covers
+        """
+        Uses the tree's radius to work out the shade radius and print
+            the size of the area that the sade covers
         """
         canopy_diameter: int = self.diameter * 20
         shade_radius: float = 3.1416 * ((canopy_diameter / 200) ** 2)
@@ -37,8 +81,24 @@ class Tree(Plant):
 
 
 class Vegetable(Plant):
+    """
+    Contains characteristics of the Vegetable plant
+
+    Args:
+        Plant (): The class that Vegetable inherits from
+    """
     def __init__(self, plant_name: str, plant_height: int, plant_age: int,
                  harvest_season: str, nutritional_value: str):
+        """
+        Initialises the Vegetable class
+
+        Args:
+            plant_name (str): Name of the plant
+            plant_height (int): Height of the plant
+            plant_age (int): Age of the plant
+            harvest_season (str): The best season to harvest the vegetable
+            nutritional_value (str): The nutritional value of the vegetable
+        """
         super().__init__(plant_name, plant_height, plant_age)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value

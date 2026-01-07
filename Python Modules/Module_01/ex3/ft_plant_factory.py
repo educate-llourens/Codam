@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 class Plant:
+    """
+    Contains the characteristics for the plant
+    """
     def __init__(self, name: str, start_height: int, start_age: int):
         self.name = name
         self.start_height = start_height

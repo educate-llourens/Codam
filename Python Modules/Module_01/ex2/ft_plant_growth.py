@@ -3,6 +3,9 @@ GROWTH_RATE = 1
 
 
 class Plant:
+    """
+    Contains the characteristics for the plant
+    """
     def __init__(self, name: str, height: int, age: int) -> None:
         """Contins the data and behaviour of a plant
 
