@@ -1,53 +1,62 @@
 #!/usr/bin/env python3
 
-def garden_operations() -> None:
-    """
-    Demonstrates the various types of exceptions
-    """
-    print("Testing ValueError...")
-    try:
-        int("abc")
-    except ValueError:
-        print("Caught ValueError: invalid literal for int()\n")
-
-    print("Testing ZeroDivisionError...")
-    try:
-        print(f"{7 / 0}")
-    except ZeroDivisionError:
-        print("Caught ZeroDivisionError: division by zero\n")
-
-    print("Testing FileNotFoundError...")
-    try:
+def garden_operations(operation_type: str) -> Exception:
+    if operation_type == "Value_Error":
+        int('abc')
+    elif operation_type == "Zero_Division_Error":
+        7 / 0
+    elif operation_type == "File_Not_Found_Error":
         open("missing.txt", "r")
-    except FileNotFoundError:
-        print("Caught FileNotFoundError: No such file 'missing.txt'\n")
-
-    print("Testing KeyError...")
-    try:
-        garden: dict = {"Rose": 26}
-        print(garden["missing_plant"])
-    except KeyError:
-        print("Caught KeyError: 'missing\\_plant'\n")
+    elif operation_type == "Key_Error":
+        plants: dict = {"tomato": 32}
+        plants["missing_plant"]
+    else:
+        int('abc')
+        7 / 0
+        open("missing.txt", "r")
+        plants: dict = {"tomato": 32}
+        plants["mising_plant"]
 
 
 def test_error_types() -> None:
-    """
-    Demonstrates that you can catch several exceptions at once
-    """
     print("=== Garden Error Types Demo ===\n")
-    garden_operations()
-    print("Testing multiple errors together...")
-
+    print("Testing ValueError...")
     try:
-        garden: dict = {"Rose": 26}
-        print(garden["missing_plant"])
-        int("abc")
-        print(f"{7 / 0}")
-        open("missing.txt", "r")
+        garden_operations("Value_Error")
+    except ValueError as error_msg:
+        msg: str = str(error_msg)
+        precise_msg: str = msg.split("with")[0]
+        print("Caught ValueError: ", precise_msg)
+
+    print("\nTesting ZeroDivisionError...")
+    try:
+        garden_operations("Zero_Division_Error")
+    except ZeroDivisionError as error_msg:
+        print("Caught ZeroDivisionError: ", error_msg)
+
+    print("\nTesting FileNotFoundError..")
+    try:
+        garden_operations("File_Not_Found_Error")
+    except FileNotFoundError as error_mesage:
+        msg = str(error_mesage)
+        precise_msg_1 = msg.split("[Errno 2] ")[1]
+        precise_msg_2 = precise_msg_1.split(" or directory: ")[0]
+        precise_msg_3 = precise_msg_1.split(" or directory: ")[1]
+        print("Caught FileNotFoundError: ", precise_msg_2, precise_msg_3)
+
+    print("\nTesting KeyError..")
+    try:
+        garden_operations("Key_Error")
+    except KeyError as error_msg:
+        print("Caught KeyError: ", error_msg)
+
+    print("\nTesting mutiple errors together...")
+    try:
+        garden_operations("")
     except (ValueError, ZeroDivisionError, FileNotFoundError, KeyError):
-        print("Caught an error, but program continues!\n")
+        print("Caught an error, but program continues!")
 
 
 if __name__ == "__main__":
     test_error_types()
-    print("All error types tested successfully!")
+    print("\nAll error types tested successfully!")
