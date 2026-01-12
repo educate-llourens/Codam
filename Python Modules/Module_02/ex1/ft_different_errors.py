@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 
 def garden_operations(operation_type: str) -> Exception:
+    """
+    Summary:
+        Creates the different types of exceptions that can occur
+    Args:
+        operation_type (str): The type of exception to test
+    Returns:
+        Exception: Returns the exception that gets raised
+    """
     if operation_type == "Value_Error":
         int('abc')
     elif operation_type == "Zero_Division_Error":
@@ -19,6 +27,11 @@ def garden_operations(operation_type: str) -> Exception:
 
 
 def test_error_types() -> None:
+    """
+    Summary:
+        Calls graden_operations and shows how the different
+        exceptions get handled.
+    """
     print("=== Garden Error Types Demo ===\n")
     print("Testing ValueError...")
     try:
