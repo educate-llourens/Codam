@@ -43,8 +43,37 @@ class PrizeFlower(Flower):
     def __init__(self, name: str, height: int, age: int,
                  colour: str, bloom: bool, points: int):
         super().__init__(name, height, age, colour, bloom)
-        self.points = points
+        self.points: int = points
 
 
 class GardenManager:
-    
+    def __init__(self, name: str):
+        self.name: str = name
+        self.gardens: list[GardenManager.Garden] = []
+
+
+    class Garden:
+        def __init__(self, garden_name: str):
+            self.garden_name: str = garden_name
+            self.plants_list: list[Plant] = []
+
+        def add_plants(self, plant: Plant) -> None:
+            self.plants_list.append(plant)
+
+
+    class GardenStats:
+        def __init__(self):
+            self.
+
+    @classmethod
+    def create_garden_network(cls) -> list['GardenManager']:
+        manager = cls("Manager")
+        alice = manager.Garden("Alice's Garden")
+        manager.gardens.append(alice)
+        bob = manager.Garden("Bob's Garden")
+        manager.gardens.append(alice)
+        return manager
+
+
+if __name__ == "__main__":
+    print("=== Garden Management System Demo ===")
