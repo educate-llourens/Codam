@@ -1,168 +1,169 @@
 #!/usr/bin/env python3
 
+import math
+
+
 class Plant:
+    """Class containing the name, height and age of the plant
     """
-        Contains the characteristics of a plant
-    """
-    def __init__(self, plant_name: str, plant_height: int, plant_age: int):
-        """
-            Initialises the Plant class
+    def __init__(self, name: str, height: int, age: int):
+        """Creates an instance of the Plant class (a plant).
 
         Args:
-            plant_name (str): Name of the plant
-            plant_height (int): Height of the plant
-            plant_age (int): Age of the plant
+            name (str): Name of the plant
+            height (int): Height of the plant in cm
+            age (int): Age of the plant in days
         """
-        self.plant_name = plant_name
-        self.plant_height = plant_height
-        self.plant_age = plant_age
+        self.name: str = name
+        self.height: int = height
+        self.age: int = age
 
 
 class Flower(Plant):
-    """
-        Contains the charectistics of a flower and inherits from the
-        Plant class
+    """Class that inherits from Plant
 
     Args:
-        Plant (): The class Flower inherits from
+        Plant (Parent): The parent class
     """
-    def __init__(self, plant_name: str, plant_height: int, plant_age: int,
-                 colour: str):
-        """
-        Initialises the Flower class
+    def __init__(self, name: str, height: int, age: int,
+                 colour: str, bloom: bool):
+        """Creates an instance from the Flower class (a flower).
 
         Args:
-            plant_name (str): Name of the flower
-            plant_height (int): height of the flower
-            plant_age (int): Age of the flower
-            colour (str): Colour of the flower when it blooms
+            name (str): Name of the Flower
+            height (int): Height of the Flower in cm
+            age (int): Age of the Flower in days
+            colour (str): Colour of the Flower when it blooms
+            bloom (bool): If it is blooming or not
         """
-        super().__init__(plant_name, plant_height, plant_age)
-        self.colour = colour
-
-    def bloom(self) -> None:
-        """
-        Prints the flower name and a blooming message
-        """
-        print(f"{self.plant_name.capitalize()} is blooming beautifully!")
+        super().__init__(name, height, age)
+        self.colour: str = colour
+        self.bloom: bool = bloom
 
 
 class Tree(Plant):
-    """
-    Contains the characteristics of a tree
+    """Class that inherits from plant
 
     Args:
-        Plant (): The class that Tree inherits from
+        Plant (Parent): The parent class
     """
-    def __init__(self, plant_name: str, plant_height: int, plant_age: int,
-                 diameter: int):
-        """
-        Initialises the Tree class
+    def __init__(self, name: str, height: int, age: int,
+                 trunk_diameter: int, produce_shade: bool):
+        """Creates an instance from the Tree class (a tree).
 
         Args:
-            plant_name (str): Name of the tree
-            plant_height (int): Height of the tree
-            plant_age (int): Age of the tree
-            diameter (int): Diameter of the tree
+            name (str): Name of the Tree
+            height (int): Height of the Tree
+            age (int): Age of the Tree in cm
+            trunk_diameter (int): Diamaeter of the trunk in cm
+            produce_shade (bool): Signals if the tree can produce shade or not
         """
-        super().__init__(plant_name, plant_height, plant_age)
-        self.diameter = diameter
+        super().__init__(name, height, age)
+        self.trunk_diameter: int = trunk_diameter
+        self.produce_shade: bool = produce_shade
 
-    def shade(self) -> None:
+    def shade_area(self) -> int:
+        """Calculates the area of shade that the tree produces
+
+        Returns:
+            int: Returns the area of shade in meters squared
         """
-        Uses the tree's radius to work out the shade radius and print
-            the size of the area that the sade covers
-        """
-        canopy_diameter: int = self.diameter * 20
-        shade_radius: float = 3.1416 * ((canopy_diameter / 200) ** 2)
-        print(f"{self.plant_name.capitalize()}", end=" ")
-        print(f"provides {int(shade_radius)}", end=" ")
-        print("square meters of shade")
+        diameter_m: int = self.trunk_diameter / 100
+        crown_radius: int = diameter_m * 10
+        area: int = math.pi * crown_radius ** 2
+        shade_area: int = math.floor(area)
+        return shade_area
 
 
 class Vegetable(Plant):
-    """
-    Contains characteristics of the Vegetable plant
+    """Class that inherits from Plant
 
     Args:
-        Plant (): The class that Vegetable inherits from
+        Plant (Parent): The Parent class it inherits from
     """
-    def __init__(self, plant_name: str, plant_height: int, plant_age: int,
+    def __init__(self, name: str, height: int, age: int,
                  harvest_season: str, nutritional_value: str):
-        """
-        Initialises the Vegetable class
+        """Creates an instance from the Vegetable class (a vegetable)
 
         Args:
-            plant_name (str): Name of the plant
-            plant_height (int): Height of the plant
-            plant_age (int): Age of the plant
-            harvest_season (str): The best season to harvest the vegetable
-            nutritional_value (str): The nutritional value of the vegetable
+            name (str): Name of the Vegetable
+            height (int): Height of the Vegetable in cm
+            age (int): Age of the Vegetable in days
+            harvest_season (str): The best season to harvest the Vegetable
+            nutritional_value (str): The nutritional information for
+            the Vegetable
         """
-        super().__init__(plant_name, plant_height, plant_age)
-        self.harvest_season = harvest_season
-        self.nutritional_value = nutritional_value
+        super().__init__(name, height, age)
+        self.harvest_season: str = harvest_season
+        self.nutritional_value: str = nutritional_value
 
-    def nutrition(self) -> None:
-        """prints the name of the vegetable and the nutrient it is highest in
-        """
-        print(f"{self.plant_name} is high in", end=" ")
-        print(f"{self.nutritional_value}")
+
+def print_plant(plant: Plant) -> None:
+    """Prints the basic information for the Plant like name, height and age
+
+    Args:
+        plant (Plant): The plant we need to print the information for
+    """
+    print(f"\n{plant.name.capitalize()} ({plant.__class__.__name__}): "
+          f"{plant.height}cm, "
+          f"{plant.age} days", end=", ")
 
 
 def print_flower(flower: Flower) -> None:
-    """Prints the information for the flower and calls the bloom function
+    """Prints information for the flower
 
     Args:
         flower (Flower): The flower that we need to print the information for
     """
-    print(f"{flower.plant_name.capitalize()}", end=" ")
-    print(f"({flower.__class__.__name__.capitalize()}):", end=" ")
-    print(f"{flower.plant_height}cm, {flower.plant_age} days,", end=" ")
+    print_plant(flower)
     print(f"{flower.colour} colour")
-    flower.bloom()
+    if flower.bloom:
+        print(f"{flower.name.capitalize()} is blooming beautifully!")
 
 
 def print_tree(tree: Tree) -> None:
-    """Prints the information for the tree and the area of shade it produces
-       and calls the shade function
+    """Prints information for the tree
 
     Args:
         tree (Tree): The tree that we need to print the information for
     """
-    print(f"{tree.plant_name.capitalize()}", end=" ")
-    print(f"({tree.__class__.__name__.capitalize()}):", end=" ")
-    print(f"{tree.plant_height}cm, {tree.plant_age} days,", end=" ")
-    print(f"{tree.diameter}cm diameter")
-    tree.shade()
+    print_plant(tree)
+    print(f"{tree.trunk_diameter}cm diameter")
+    if tree.produce_shade:
+        print(f"{tree.name.capitalize()} provides {tree.shade_area()} "
+              f"square meters of shade")
 
 
-def print_vegetable(veg: Vegetable) -> None:
-    """Prints the information for the vegetable and calls the
-       nutritional value function
+def print_vegetable(veg: Vegetable):
+    """Prints information for the vegetable
 
     Args:
-        veg (Vegetable): the vegetable that we need to print the
+        veg (Vegetable): The vegetable that we need to print the
         information for
     """
-    print(f"{veg.plant_name.capitalize()}", end=" ")
-    print(f"({veg.__class__.__name__.capitalize()}):", end=" ")
-    print(f"{veg.plant_height}cm, {veg.plant_age} days,", end=" ")
+    print_plant(veg)
     print(f"{veg.harvest_season} harvest")
-    print(f"{veg.plant_name.capitalize()} is rich in", end=" ")
-    print(f"{veg.nutritional_value}")
+    print(f"{veg.name.capitalize()} is {veg.nutritional_value}")
 
 
-rose: Flower = Flower("rose", 25, 30, "red")
-sunflower: Flower = Flower("sunflower", 100, 60, "yellow")
-oak: Tree = Tree("oak", 500, 1825, 50)
-Elm: Tree = Tree("elm", 400, 1500, 70)
-tomato: Vegetable = Vegetable("tomato", 80, 90, "summer", "Vitamin C")
-orange: Vegetable = Vegetable("orange", 5, 20, "winter", "Vitamin C")
+if __name__ == "__main__":
+    print("=== Garden Plant Types ===")
 
-print("=== Garden Plant Types ===\n")
-print_flower(rose)
-print("")
-print_tree(oak)
-print("")
-print_vegetable(tomato)
+    # Flowers
+    rose = Flower("rose", 25, 30, "red", True)
+    bluebell = Flower("bluebell", 15, 20, "blue", False)
+
+    # Trees
+    oak = Tree("oak", 500, 1825, 50, True)
+    ash = Tree("ash", 350, 2000, 30, False)
+
+    # Vegetables
+    tomato = Vegetable("Tomato", 80, 90, "summer", "rich in vitamin C")
+    carrot = Vegetable("Carrot", 12, 15, "autumn", "rich in Vitamin A")
+
+    print_flower(rose)
+    print_flower(bluebell)
+    print_tree(oak)
+    print_tree(ash)
+    print_vegetable(tomato)
+    print_vegetable(carrot)
