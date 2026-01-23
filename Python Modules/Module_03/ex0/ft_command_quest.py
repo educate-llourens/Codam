@@ -6,7 +6,7 @@ if __name__ == "__main__":
     print("=== Command Quest ===")
     argv_len: int = len(sys.argv)
     i: int = 0
-    
+
     if argv_len > 1:
         print(f"Program name: {sys.argv[0]}")
         print(f"Arguments received: {argv_len - 1}")
