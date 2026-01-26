@@ -32,13 +32,14 @@ def print_plants_list(plants_list: list[Plant]):
         i += 1
 
 
-rose: Plant = Plant("rose", 25, 30)
-oak: Plant = Plant("oak", 200, 365)
-cactus: Plant = Plant("cactus", 5, 90)
-sunflower: Plant = Plant("sunflower", 80, 45)
-fern: Plant = Plant("fern", 15, 120)
-plants_list: list[Plant] = [rose, oak, cactus, sunflower, fern]
-print("=== Plant Factory Output ===")
-print_plants_list(plants_list)
-print("")
-print(f"Total plants created: {len(plants_list)}")
+if __name__ == "__main__":
+    rose: Plant = Plant("rose", 25, 30)
+    oak: Plant = Plant("oak", 200, 365)
+    cactus: Plant = Plant("cactus", 5, 90)
+    sunflower: Plant = Plant("sunflower", 80, 45)
+    fern: Plant = Plant("fern", 15, 120)
+    plants_list: list[Plant] = [rose, oak, cactus, sunflower, fern]
+    print("=== Plant Factory Output ===")
+    print_plants_list(plants_list)
+    print("")
+    print(f"Total plants created: {len(plants_list)}")

@@ -28,11 +28,12 @@ class Plant:
               f"{self.age} days old")
 
 
-rose: Plant = Plant("rose", 25, 30)
-sunflower: Plant = Plant("sunflower", 80, 45)
-cactus: Plant = Plant("cactus", 15, 120)
+if __name__ == "__main__":
+    rose: Plant = Plant("rose", 25, 30)
+    sunflower: Plant = Plant("sunflower", 80, 45)
+    cactus: Plant = Plant("cactus", 15, 120)
 
-print("=== Garden Plant Registry ===")
-rose.print_plant()
-sunflower.print_plant()
-cactus.print_plant()
+    print("=== Garden Plant Registry ===")
+    rose.print_plant()
+    sunflower.print_plant()
+    cactus.print_plant()

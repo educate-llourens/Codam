@@ -75,12 +75,13 @@ def get_info(plant_name: Plant, nbr_days: int) -> Plant:
     return plant_name
 
 
-start_day: int = 1
-growth_days: int = 6
-rose: Plant = Plant("rose", 25, 30)
-print(f"=== Day {start_day} ===")
-rose.print_plant()
-print(f"=== Day {start_day + growth_days} ===")
-updated_rose: Plant = get_info(rose, growth_days)
-updated_rose.print_plant()
-print(f"Growth this week: +{growth_days * GROWTH_RATE} cm")
+if __name__ == "__main__":
+    start_day: int = 1
+    growth_days: int = 6
+    rose: Plant = Plant("rose", 25, 30)
+    print(f"=== Day {start_day} ===")
+    rose.print_plant()
+    print(f"=== Day {start_day + growth_days} ===")
+    updated_rose: Plant = get_info(rose, growth_days)
+    updated_rose.print_plant()
+    print(f"Growth this week: +{growth_days * GROWTH_RATE} cm")

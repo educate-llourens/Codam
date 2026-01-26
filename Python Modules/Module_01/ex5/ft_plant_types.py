@@ -68,9 +68,9 @@ class Tree(Plant):
         Returns:
             int: Returns the area of shade in meters squared
         """
-        diameter_m: int = self.trunk_diameter / 100
-        crown_radius: int = diameter_m * 10
-        area: int = math.pi * crown_radius ** 2
+        diameter_m: float = self.trunk_diameter / 100
+        crown_radius: float = diameter_m * 10
+        area: float = math.pi * crown_radius ** 2
         shade_area: int = math.floor(area)
         return shade_area
 

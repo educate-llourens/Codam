@@ -81,7 +81,7 @@ def print_height_result(plant: SecurePlant, height: int) -> None:
 
 
 def print_age_result(plant: SecurePlant, age: int) -> None:
-    """ets the age and prints [OK] if it is a valid change or
+    """Gets the age and prints [OK] if it is a valid change or
        an error message with [REJECTED] if it is an invalid change
 
     Args:
@@ -98,14 +98,16 @@ def print_age_result(plant: SecurePlant, age: int) -> None:
         print("Security: Negative age rejected")
 
 
-rose: SecurePlant = SecurePlant("rose", 25, 30)
-current_plant: SecurePlant = rose
-print("=== Garden security System ===")
-print(f"Plant created: {rose.get_name().capitalize()}")
-print_height_result(rose, 25)
-print_age_result(rose, 30)
-print("")
-print_height_result(rose, -5)
-print("")
-print(f"Current plant: {current_plant.name}", end="")
-print(f"({current_plant._start_height}cm, {current_plant._start_age} days)")
+if __name__ == "__main__":
+    rose: SecurePlant = SecurePlant("rose", 25, 30)
+    current_plant: SecurePlant = rose
+    print("=== Garden security System ===")
+    print(f"Plant created: {rose.get_name().capitalize()}")
+    print_height_result(rose, 25)
+    print_age_result(rose, 30)
+    print("")
+    print_height_result(rose, -5)
+    print("")
+    print(f"Current plant: {current_plant.name}", end="")
+    print(f"({current_plant._start_height}cm, {current_plant._start_age} "
+          f"days)")
