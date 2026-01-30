@@ -129,7 +129,8 @@ class GardenManager:
             self.height_validation: bool = False
             self.nbr_gardens: int = 0
 
-        def count_plant_types(self, manager: 'GardenManager') -> list[int]:
+        @staticmethod
+        def count_plant_types(garden: 'GardenManager.Garden') -> list[int]:
             """Counts the number of each type of plant we have in the garden
 
             Args:
@@ -144,15 +145,13 @@ class GardenManager:
             nbr_flower: int = 0
             nbr_plant: int = 0
             count_plant_types: list[int] = []
-            self.manager = manager
-            for garden in self.manager.gardens:
-                for plant in garden.plants_list:
-                    if isinstance(plant, PrizeFlower):
-                        nbr_prize_flower += 1
-                    elif isinstance(plant, Flower):
-                        nbr_flower += 1
-                    else:
-                        nbr_plant += 1
+            for plant in garden.plants_list:
+                if isinstance(plant, PrizeFlower):
+                    nbr_prize_flower += 1
+                elif isinstance(plant, Flower):
+                    nbr_flower += 1
+                else:
+                    nbr_plant += 1
             count_plant_types = [nbr_plant, nbr_flower, nbr_prize_flower]
             return count_plant_types
 
@@ -251,7 +250,7 @@ def garden_report(garden: GardenManager.Garden) -> None:
     print(f"\nPlants added: {garden.manager.manager_stats.plants_added}, "
           f"Total growth: {garden.manager.manager_stats.total_growth}")
     plant_types = garden.manager.manager_stats.\
-        count_plant_types(garden.manager)
+        count_plant_types(garden)
     print(f"Plant types: {plant_types[0]} "
           f"regular, {plant_types[1]} flowering, "
           f"{plant_types[2]} prize flowers")

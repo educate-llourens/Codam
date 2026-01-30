@@ -6,8 +6,8 @@ class SecurePlant:
     """
     def __init__(self, name: str, start_height: int, start_age: int):
         self.name = name
-        self._start_height = start_height
-        self._start_age = start_age
+        self.__start_height = start_height
+        self.__start_age = start_age
 
     def set_height(self, new_height: int) -> int:
         """Checks the new height is safe and sets the new height.
@@ -24,7 +24,7 @@ class SecurePlant:
         """
         if new_height < 0:
             return -1
-        self._start_height = new_height
+        self.__start_height = new_height
         return 0
 
     def set_age(self, new_age: int) -> int:
@@ -39,7 +39,7 @@ class SecurePlant:
         """
         if new_age < 0:
             return -1
-        self._start_age = new_age
+        self.__start_age = new_age
         return 0
 
     def get_height(self) -> int:
@@ -48,7 +48,7 @@ class SecurePlant:
         Returns:
             int: returns the height of the plant
         """
-        return self._start_height
+        return self.__start_height
 
     def get_age(self) -> int:
         """Retrieves the age
@@ -56,7 +56,7 @@ class SecurePlant:
         Returns:
             int: Returns the height of the plant
         """
-        return self._start_age
+        return self.__start_age
 
     def get_name(self) -> str:
         return self.name
@@ -109,5 +109,7 @@ if __name__ == "__main__":
     print_height_result(rose, -5)
     print("")
     print(f"Current plant: {current_plant.name}", end="")
-    print(f"({current_plant._start_height}cm, {current_plant._start_age} "
+    plant_start_height = current_plant.get_height()
+    plant_age = current_plant.get_age()
+    print(f"({plant_start_height}cm, {plant_age} "
           f"days)")
